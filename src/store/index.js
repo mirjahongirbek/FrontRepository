@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
+import joha from "./joha"
 
 Vue.use(Vuex);
 var aurl=axios.create({
@@ -8,6 +9,9 @@ var aurl=axios.create({
 
 });
 const store= new Vuex.Store({
+    modules:{
+      joha
+    },
     state:{
     http:aurl,
     },

@@ -1,19 +1,44 @@
 <template>
   <div id="app">
-
-    <server-table url="/home" serviceName="data"></server-table>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<button @click="showAdd=true">ShowModal</button>
+      <router-view></router-view>
+    <server-table url="/home"
+                  namespace="true"
+                  @edit="EditData"
+                  @delete="DeleteData"
+                  serviceName="data"></server-table>
+    <add-modal url="/home" :is-show="showAdd" namespace="true"  service-name="data"></add-modal>
+     </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import ServerTable from "./components/table/serverTable.vue"
+import AddModal from "./components/modals/addmodel.vue"
 export default {
   name: 'app',
   components: {
     HelloWorld,
-    ServerTable
+    ServerTable,
+    AddModal
+  },
+  data(){
+    return{
+      showAdd:false
+    }
+  },
+  methods:{
+      EditData(id, serviceName){
+          console.log(id);
+          console.log(serviceName);
+      },
+      DeleteData(id, serviceName){
+          console.log(id);
+          console.log(serviceName);
+      }
+
+  },
+  mounted() {
   }
 }
 </script>
