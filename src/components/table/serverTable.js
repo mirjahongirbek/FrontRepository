@@ -71,13 +71,19 @@ export default {
         getColumns(_this) {
             return new Promise((resolve, reject) => {
                 if (_this.namespace) {
-                    console.log(_this.namespace)
+                    let props= this.$store.state.joha.entities[_this.serviceName];
+                    console.log(props);
+                    if(props){
+                        _this.parseProps(props);
+                        resolve();
+                        return
+                    }
                 }
                 _this.$store.state.http.get(_this.url + "/GetProps?id=" + _this.serviceName).then(response => {
                     if (response.data && response.data.result) {
                         if (_this.namespace) {
                             _this.$store.state.joha.entities[_this.serviceName] = response.data.result;
-                            this.parseData(response.data.result);
+                            this.parseProps(response.data.result);
                             resolve();
                             return;
                         }
@@ -89,36 +95,38 @@ export default {
                 })
             });
         },
-        parseData(data) {
-            let _this = this;
-            for (const key in data) {
-                _this.columns.push(key);
-                //editDelete ...
-                let value = _this.$store.state.joha.slots.firstOrDefault(m => m.key == data[key].type);
-                if (value) {
-                    _this.changeSlots.push({name: key, options: _this.$store.getters[value.path](data[key], _this.serviceName)});
-                }
-                ///
-                if (data[key].label) {
-                    _this.options.headings.key = data[key].label;
-                    if (data[key].otherTable) {
-                        _this.$store.getters["joha/getParseData"](_this.url, data[key].otherTable, key, _this)
-                            .then((key, data) => {
-                                _this.otherTable(key, data);
-                            }, err => {
-                                _this.$store.getters.errorParse(err, _this);
-                            })
-                    } else {
-                        let income = _this.$store.getters["joha/getData"](data);
-                        if (income) {
-                            _this.parseSlot(income);
-                        }
-                    }
-                } else {
-                    _this.options.headings.key = key;
-                }
+        parseProps(data) {
+            this.$store.getters["joha/parseTableProps"](data, this);
 
-            }
+            /*    for (const key in data) {
+                    _this.columns.push(key);
+                    //editDelete ...
+                    let value = _this.$store.state.joha.slots.firstOrDefault(m => m.key == data[key].type);
+                    if (value) {
+                        _this.changeSlots.push({name: key, options: _this.$store.getters[value.path](data[key], _this.serviceName)});
+                    }
+
+                    ///
+                    if (data[key].label) {
+                        _this.options.headings.key = data[key].label;
+                        if (data[key].otherTable) {
+                            _this.$store.getters["joha/getParseData"](_this.url, data[key].otherTable, key, _this)
+                                .then((key, data) => {
+                                    _this.otherTable(key, data);
+                                }, err => {
+                                    _this.$store.getters.errorParse(err, _this);
+                                })
+                        } else {
+                            let income = _this.$store.getters["joha/getData"](data);
+                            if (income) {
+                                _this.parseSlot(income);
+                            }
+                        }
+                    } else {
+                        _this.options.headings.key = key;
+                    }
+
+                }*/
         },
 
         getData() {
@@ -127,6 +135,7 @@ export default {
             if (!_this.url) return;
             this.getColumns(_this).then(result => {
                 console.log(result);
+
                 // _this.$store.state.http.get(_this.url+).then(response => {
                 // }, err => {
                 //     _this.$store.getters.errorParse(err, _this);
@@ -140,7 +149,7 @@ export default {
     },
 
     mounted() {
-        this.getData(true);
+        this.getData();
     },
     watch: {
         "start": function (val) {

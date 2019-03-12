@@ -1,26 +1,27 @@
 <template>
   <div id="app">
-<button @click="showAdd=true">ShowModal</button>
+
       <router-view></router-view>
-    <server-table url="/home"
+<!--    <server-table url="/home"
                   namespace="true"
                   @edit="EditData"
                   @delete="DeleteData"
                   serviceName="data"></server-table>
     <add-modal url="/home" :is-show="showAdd" namespace="true"  service-name="data"></add-modal>
-     </div>
+    --> </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+/*
 import ServerTable from "./components/table/serverTable.vue"
 import AddModal from "./components/modals/addmodel.vue"
+*/
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+/*    HelloWorld,
     ServerTable,
-    AddModal
+    AddModal*/
   },
   data(){
     return{

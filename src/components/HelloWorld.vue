@@ -1,17 +1,33 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <!--<server-table url="/home" namespace="true" serviceName="data"></server-table>-->
-    <!--<add-modal url="/home" :is-show="showAdd" namespace="true"  service-name="data"></add-modal>-->
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <server-table url="/home" namespace="namespace" serviceName="data"></server-table>
+    <add-modal url="/home" :is-show="showAdd" namespace="namespace"  service-name="data"></add-modal>
+
   </div>
 </template>
 
 <script>
+  import  ServerTable from "../components/table/serverTable.vue"
+  import AddModal from "../components/modals/addmodel.vue"
 export default {
+    components:{
+      ServerTable,
+      AddModal,
+    },
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+
+  },
+  data(){
+    return{
+      showAdd: true,
+      namespace:true
+    }
+  },
+  methods:{
+
   }
 }
 </script>

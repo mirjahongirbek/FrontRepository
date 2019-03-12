@@ -55,22 +55,24 @@ export default {
                 })
 
         },
-        addEntity() {
+        updateEntity() {
             if (!this.isAdd) {
                 this.$emit("add");
                 return;
             }
+
             this.$store.state.http.post(this.url + "/AddData", {
                 name: this.serviceName,
                 data: JSON.stringify(this.modal)
             }).then(response => {
-
+                console.log(response);
                 this.$emit("add", response.data);
             }, err => {
                 this.$store.getters.errorParse(err, this);
             })
 
         },
+        //TODO why I am use
         parseData(data) {
             let _this = this;
             for (const key in data) {
@@ -93,8 +95,8 @@ export default {
                     this.parseData(response.data.result);
                     if (this.namespace) {
                         this.$store.state.joha.entities[this.serviceName] = response.data;
-
                     }
+
                     resolve();
                     return;
                 }, err => {
@@ -107,13 +109,19 @@ export default {
         getData() {
             this.$store.state.http.get(this.url + "/GetById?id=" + this.id + "&name=" + this.serviceName).then(response => {
                 console.log(response.data.result);
-              this.dataList=  this.$store.getters["joha/joinDataList"](response.data.result,this.dataList, this.modals);
-              console.log(this.modals);
-              }, err => {
+              this.dataList= this.$store.getters["joha/joinDataList"](response.data.result, this.dataList, this.modals);
+              console.log(this.dataList);
+                console.log(this.modals);
+            }, err => {
                 this.$store.getters.errorParse(err, this)
             })
         }
 
+    },
+    computed:{
+getDatalist(){
+    return this.dataList;
+}
     },
     mounted() {
         this.getProps().then(r => {
