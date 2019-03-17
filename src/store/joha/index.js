@@ -1,14 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        list: {
-            "EditDelete": {},
-            "Edit": {},
-            "Delete": {},
-            "Select": {},
-            "CheckBox": {},
-            "Boolean": {},
-        },
+        list: {},
         entities: {},
         types: {
             "input": {
@@ -24,10 +17,47 @@ export default {
         },
         slots: [
             {
-                key: "EditDelete",
+                key: [75, 76, 80],
                 path: "joha/EditDelete"
-            }
+            },
+            {
+                key: [28],
+                run: function (data, serviceName) {
+                    let result={};
+                    result.serviceName= serviceName;
+                    result.data=data;
+                    return result;
 
+                },
+            },
+            {
+                key: [26],
+                run: function (data, serviceName) {
+
+                    let result={};
+                    result.serviceName= serviceName;
+                    result.data=data;
+                    return result;
+                },
+            },
+            {
+                key: [29],
+                run: function (data, serviceName) {
+                    let result={};
+                    result.serviceName= serviceName;
+                    result.data=data;
+                    return result;
+                },
+            },
+            {
+                key:[50],
+                run: function (data, serviceName) {
+                    let result={};
+                    result.serviceName= serviceName;
+                    result.data=data;
+                    return result;
+                },
+            }
         ],
 
 
@@ -38,13 +68,21 @@ export default {
             for (const key in data) {
                 _this.columns.push(key);
                 //TODO editDelete ... parent
-                let value = state.slots.firstOrDefault(m => m.key == data[key].type);
+                let value = state.slots.firstOrDefault(m => m.key.contains(data[key].fontType));
                 if (value) {
                     // changeSlots
-                    _this.changeSlots.push({
-                        name: key,
-                        options: _this.$store.getters[value.path](data[key], _this.serviceName)
-                    });
+                    if(value.path){
+                        _this.changeSlots.push({
+                            name: key,
+                            options: _this.$store.getters[value.path](data[key], _this.serviceName)
+                        });
+                    }else if(value.run){
+                        _this.changeSlots.push({
+                            name: key,
+                            options: value.run(data[key], _this.serviceName)
+                        });
+                    }
+
                 }
 
                 ///
@@ -68,7 +106,8 @@ export default {
                     _this.options.headings[key] = key;
                 }
 
-            }console.log(_this.options);
+            }
+            console.log(_this.options);
             console.log(_this.columns);
         },
         getData: (state) => (data) => {
@@ -117,8 +156,8 @@ export default {
         },
         EditDelete: (state) => (data, serviceName) => {
             let result = {};
-            result.serviceName = serviceName;
-            result.type = "EditDelete";
+            result.data = data;
+            result.serviceName= serviceName;
             result.run = function (_this) {
                 _this.$emit(this.eventName, this.value, this.serviceName);
             };

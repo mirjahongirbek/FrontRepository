@@ -1,11 +1,16 @@
 <template>
     <div>
-        <b-form-input v-model="values" v-if="isShow('input')"/>
-        <b-form-checkbox v-model="values" v-else-if="isShow('checkBox')"/>
-        <b-form-radio v-model="values" v-else-if="isShow('radio')"></b-form-radio>
-        <b-button-group v-else-if="isShow('EditDelete')">
-            <b-button @click="transdEvent('edit',options)">Edit</b-button>
-            <b-button @click="transdEvent('delete',options)">Delete</b-button>
+        <b-form-input v-model="values" v-if="isShow(0,24)"/>
+        <b-form-checkbox v-model="values" v-else-if="isShow(26)"/>
+        <b-form-radio v-model="values" v-else-if="isShow(27)"></b-form-radio>
+        <select v-else-if="isShow(28)">
+            <option>sdsd</option>
+            <option>sdsd</option>
+
+        </select>
+        <b-button-group v-else-if="isShow(75, 99)">
+            <b-button @click="transdEvent('edit',options)" v-if="isShow([75,80])">Edit</b-button>
+            <b-button @click="transdEvent('delete',options)" v-if="isShow([76,80])">Delete</b-button>
         </b-button-group>
     </div>
 </template>
@@ -41,24 +46,33 @@
             }
         },
         methods: {
+
             transdEvent(name, options) {
                 options.eventName = name;
                 this.$emit('getEvent', options);
             },
-            isShow(type) {
-                let _this = this;
-                if (this.options) {
-                    if (this.options.type == type) {
+            derfgd() {
+
+            },
+            isShow(id, id2) {
+
+
+                if (id2) {
+                    if (id<this.options.data.fontType&& id2>this.options.data.fontType)
                         return true;
-                    }
                     return false;
                 }
-                for (const i in this.$store.state.joha.types[type]) {
-                    if (i == _this.type) {
-                        return true;
-                    }
+                if (Array.isArray(id)) {
+                    if(id.contains(this.options.data.fontType))return true;
+
+                    return false;
+                }
+                if (Number.isInteger(id) &&this.options.data.fontType== id) {
+                    return true;
                 }
                 return false;
+
+
             },
             parseOptions(option) {
 
