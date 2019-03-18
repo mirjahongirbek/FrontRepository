@@ -6,10 +6,10 @@
                     Add Aytim
                 </b-card-text>
                 <div v-for="(key, value) in dataList" :key="value">
-                  <j-input :type="key.type"></j-input>
-                  </div>
+                    <j-input :type="key.type"></j-input>
+                </div>
                 <b-card-text></b-card-text>
-                </b-card>
+            </b-card>
         </b-modal>
     </div>
 </template>
@@ -54,15 +54,8 @@
                 this.$emit("cansel");
             },
             saveEntity() {
-                let result= this.$store.getters["joha/joinModal"](this.modals, this.dataList);
-                if(!result)return;
-                /*for (const key in this.modals) {
-                    let temp = this.dataList.firstOrDefault(m => m.name == key);
-                    if (!temp) {
-                        continue;
-                    }
-                    this.modals[key] = temp.value;
-                }*/
+                let result = this.$store.getters["joha/joinModal"](this.modals, this.dataList);
+                if (!result) return;
                 this.$store.state.http.post(this.url + "/AddData", {
                     name: this.serviceName,
                     data: JSON.stringify(this.modals)
@@ -98,8 +91,8 @@
                         continue;
                     }
                     _this.modals[key] = "";
-                    let type= data[key].type;
-                    _this.dataList.push({name: key, label: data[key].label, type:type, value: ""})
+                    let type = data[key].type;
+                    _this.dataList.push({name: key, label: data[key].label, type: type, value: ""})
                 }
             },
             getData() {
@@ -107,10 +100,10 @@
                     this.parseData(this.$store.state.joha.entities[this.serviceName]);
                     return;
                 }
-                this.$store.state.http.get(this.url+ "/GetProps?id=" + this.serviceName).then(response => {
+                this.$store.state.http.get(this.url + "/GetProps?id=" + this.serviceName).then(response => {
                     this.parseData(response.data.result);
-                    if(this.namespace){
-                        this.$store.state.joha.entities[this.serviceName]= response.data;
+                    if (this.namespace) {
+                        this.$store.state.joha.entities[this.serviceName] = response.data;
                     }
                 }, err => {
                     this.$store.getters.errorParse(err, this);
