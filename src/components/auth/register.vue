@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="form-group row">
-          <label class="col-md-4 col-form-label text-right">Маска номер карты</label>
+          <label class="col-md-4 col-form-label text-right">User Name</label>
           <div class="col-md-8">
             <input type="text" v-model="temp.userName" class="form-control">
           </div>
@@ -11,7 +11,7 @@
       </div>
       <div class="col-lg-6">
         <div class="form-group row">
-          <label class="col-md-4 col-form-label text-right">Маска номер карты</label>
+          <label class="col-md-4 col-form-label text-right">Email</label>
           <div class="col-md-8">
             <input type="text" v-model="temp.email" class="form-control">
           </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="col-lg-6">
         <div class="form-group row">
-          <label class="col-md-4 col-form-label text-right">Маска номер карты</label>
+          <label class="col-md-4 col-form-label text-right"> Password </label>
           <div class="col-md-8">
             <input type="text" v-model="temp.password" class="form-control">
           </div>

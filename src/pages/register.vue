@@ -1,7 +1,7 @@
 <template>
   <div>
       <register-modal
-      :url="/auth"
+      :url="url"
       ></register-modal>
       </div>  
 </template>
@@ -11,11 +11,11 @@ import registerModal from "../components/auth/register.vue"
 export default {
 data(){
     return{
-
+url:"/auth"
     }
 },
 components:{
-
+registerModal
 }
 }
 </script>
