@@ -5,7 +5,7 @@ import joha from "./joha"
 
 Vue.use(Vuex);
 var aurl=axios.create({
-    baseURL:"http://localhost:1234"
+    baseURL:"http://localhost:1596"
 
 });
 const store= new Vuex.Store({

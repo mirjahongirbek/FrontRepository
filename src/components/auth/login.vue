@@ -18,18 +18,18 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn base_btn" data-toggle="modal" data-target="#addModal">Добавить</button>
+            <button @click="login" class="btn base_btn" >Login</button>
         </div>
     </div>
 </template>
 
 <script>
+
     export default {
         name: "login.vue",
         props: {
             data: {
                 type: Object,
-
             },
             isAdd: {
                 type: Boolean,
@@ -43,13 +43,21 @@
         },
         data() {
             return {
-                temp: {}
-
+                temp: {userName:"",
+                password:"",
+                deviceId:"",
+                deviceName:"",
+                }
             }
         },
         methods: {
+            //TODO change
             login() {
-                this.$store.state.http.post(this.url + "/login").then(response => {
+                console.log(this.temp);
+                this.temp.deviceId="123456"
+                this.temp.deviceName="joha";
+                this.$store.state.http.post(this.url + "/login", this.temp).then(response => {
+                    console.log(response);
                     this.$store.state.http.defaults.headers.common = {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
