@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import loginUser from "../components/login/login.vue"
+    import loginUser from "../components/auth/login.vue"
 
     export default {
         data() {

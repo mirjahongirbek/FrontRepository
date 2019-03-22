@@ -6,7 +6,7 @@
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-right">Наименование товара</label>
                         <div class="col-md-8">
-                            <input type="text" v-model="" class="form-control">
+                            <input type="text" v-model="kjb" class="form-control">
                         </div>
                     </div>
                 </div>

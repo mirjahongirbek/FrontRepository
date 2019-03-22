@@ -3,6 +3,7 @@
       <register-modal
       :url="url"
       ></register-modal>
+    my name is joha
       </div>  
 </template>
 
