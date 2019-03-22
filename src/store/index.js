@@ -13,6 +13,7 @@ const store= new Vuex.Store({
       joha
     },
     state:{
+        isAuth:false,
     http:aurl,
     },
     getters:{

@@ -1,6 +1,13 @@
 <template>
     <div>
-        <login-user :url="url" ></login-user>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-6">
+                <login-user :url="url" ></login-user></div>
+            <div class="col-lg-2"></div>
+
+        </div>
+
     </div>
 </template>
 
@@ -10,7 +17,7 @@
     export default {
         data() {
             return {
-                url: "/account/login"
+                url: "/auth"
             }
         },
         methods: {},

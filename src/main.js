@@ -8,13 +8,23 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from "./router"
 
+
 Vue.use(BootstrapVue);
 Vue.use(ServerTable);
 Vue.use(ClientTable);
+
+
 Vue.component("JInput", JInput);
 Vue.config.productionTip = false;
 new Vue({
-  router,
-  render: h => h(App),
-  store
+    router,
+
+    data() {
+        return {}
+    },
+    render: h => h(App),
+    mounted() {
+
+    },
+    store
 }).$mount('#app');
