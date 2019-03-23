@@ -64,7 +64,7 @@ export default {
     },
     getters: {
         parseTableProps: (state, getters) => (data, _this) => {
-            console.log(_this);
+          
             for (const key in data) {
                 _this.columns.push(key);
                 //TODO editDelete ... parent

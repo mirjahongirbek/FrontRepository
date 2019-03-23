@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal v-model="modalShow" @ok="saveEntity()">
+       
             <b-card title="Card title" sub-title="Card subtitle">
                 <b-card-text>
                     Add Aytim
@@ -10,7 +10,7 @@
                 </div>
                 <b-card-text></b-card-text>
             </b-card>
-        </b-modal>
+     
     </div>
 </template>
 
