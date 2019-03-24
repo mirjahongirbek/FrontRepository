@@ -55,8 +55,6 @@
 
             },
             isShow(id, id2) {
-
-
                 if (id2) {
                     if (id<this.options.data.fontType&& id2>this.options.data.fontType)
                         return true;

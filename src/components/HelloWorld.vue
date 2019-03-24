@@ -1,9 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <server-table url="/home" namespace="namespace" serviceName="Company"></server-table>
-    <add-modal url="/home" :is-show="showAdd" namespace="namespace"  service-name="data"></add-modal>
-
+    <server-table url="/home" serviceName="Company"></server-table>
+    <add-modal url="/home" :is-show="showAdd"   service-name="Company"></add-modal>
   </div>
 </template>
 
