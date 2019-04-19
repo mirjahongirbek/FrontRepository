@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-6">
-                <login-user :url="url" ></login-user></div>
+                <login-user :url="url"></login-user>
+            </div>
             <div class="col-lg-2"></div>
 
         </div>

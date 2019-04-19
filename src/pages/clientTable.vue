@@ -1,10 +1,11 @@
 <template>
-    <div>
-        <div>
-            <client-table url="/home" serviceName="data" />
-           <!-- <client-table url="/home"
-                          service-name="data"></client-table>-->
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <client-table url="/home" serviceName="Company" />
+
         </div>
+        <div class="col-lg-2"></div>
     </div>
 </template>
 

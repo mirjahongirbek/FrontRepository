@@ -15,11 +15,12 @@ export default {
         },
         namespace: {
             type: Boolean,
-            default: false,
+            default: true,
         }
     },
     data() {
         return {
+            disabled:true,
             columns: [],
             changeSlots: [],
             options: {
@@ -48,6 +49,7 @@ export default {
                     }.bind(this));
                 },
                 responseAdapter({data}) {
+                    console.log(data);
                     return {
                         data: data.result.items,
                         count: data.result.count
@@ -72,18 +74,20 @@ export default {
             return new Promise((resolve, reject) => {
                 if (_this.namespace) {
                     let props= this.$store.state.joha.entities[_this.serviceName];
-                    console.log(props);
-                    if(props){
+                      if(props){
                         _this.parseProps(props);
                         resolve();
                         return
                     }
                 }
                 _this.$store.state.http.get(_this.url + "/GetProps?id=" + _this.serviceName).then(response => {
+                    console.log("hello");
                     if (response.data && response.data.result) {
+                        _this.parseProps(response.data.result);
                         if (_this.namespace) {
                             _this.$store.state.joha.entities[_this.serviceName] = response.data.result;
-                            this.parseProps(response.data.result);
+
+
                             resolve();
                             return;
                         }
@@ -96,8 +100,10 @@ export default {
             });
         },
         parseProps(data) {
-            this.$store.getters["joha/parseTableProps"](data, this);
-
+            console.log("income Parse Props");
+        this.$store.getters["joha/parseTableProps"](data, this)
+            console.log(this.columns)
+            //console.log(this.columns)
             /*    for (const key in data) {
                     _this.columns.push(key);
                     //editDelete ...
